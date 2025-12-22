@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -13,6 +13,14 @@ export default function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -140,12 +148,12 @@ export default function ContactForm() {
             whileTap="tap"
             onMouseEnter={() => setIsButtonHovered(true)}
             onMouseLeave={() => setIsButtonHovered(false)}
-            className="group relative w-full overflow-hidden rounded-xl bg-gray-900 border border-gray-800 py-4 px-8 font-bold text-white transition-all duration-300 disabled:opacity-50 hover:border-indigo-500"
+            className="group relative w-full overflow-hidden rounded-xl bg-gray-900 border border-gray-800 py-4 px-8 font-bold text-white transition-all duration-300 disabled:opacity-50 md:border-indigo-500 max-md:border-indigo-500"
           >
             {/* The Gradient Dot Background (Expands) */}
             <motion.span
               variants={{
-                initial: { scale: 0, x: "-50%", y: "-50%" },
+                initial: isMobile ? { scale: 1, x: "-50%", y: "-50%" } : { scale: 0, x: "-50%", y: "-50%" },
                 hover: { scale: 1, x: "-50%", y: "-50%" },
               }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -153,7 +161,7 @@ export default function ContactForm() {
             />
 
             {/* Button Content */}
-            <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-white">
+            <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-white max-md:text-white">
               {loading ? (
                 "Sending..."
               ) : (
@@ -161,7 +169,7 @@ export default function ContactForm() {
                   Send Message
                   <motion.div
                     animate={
-                      isButtonHovered
+                      isMobile || isButtonHovered
                         ? { opacity: 1, x: 5 }
                         : { opacity: 0, x: -10 }
                     }

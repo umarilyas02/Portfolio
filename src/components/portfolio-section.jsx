@@ -2,19 +2,34 @@
 import { useEffect, useState } from "react";
 import { Github, ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
+import Loader from "@/app/loader";
 
 export default function PortfolioSection() {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const fetchRepos = async () => {
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
         const response = await fetch(
-          "https://api.github.com/users/umarilyas02/repos?sort=updated&direction=desc"
+          "https://api.github.com/users/umarilyas02/repos?sort=updated&direction=desc",
+          { signal: controller.signal }
         );
+        clearTimeout(timeoutId);
+
         if (!response.ok) {
           throw new Error("Failed to fetch repositories");
         }
@@ -22,7 +37,7 @@ export default function PortfolioSection() {
         setRepos(data);
       } catch (err) {
         console.error("Error fetching repos:", err);
-        setError(err.message);
+        setError(err.message || "Failed to load repositories");
       } finally {
         setLoading(false);
       }
@@ -32,18 +47,7 @@ export default function PortfolioSection() {
   }, []);
 
   if (loading) {
-    return (
-      <section id="projects" className="pt-8 pb-16 md:pt-12 md:pb-24 px-4 sm:px-6 lg:px-8 bg-gray-950">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Projects</h2>
-            <p className="text-gray-400 text-lg">
-              Loading repositories...
-            </p>
-          </div>
-        </div>
-      </section>
-    );
+    return <Loader />;
   }
 
   if (error) {
@@ -60,7 +64,7 @@ export default function PortfolioSection() {
   }
 
   return (
-    <section id="projects" className="pt-8 pb-16 md:pt-12 md:pb-24 px-4 sm:px-6 lg:px-8 bg-gray-950">
+    <section id="portfolio" className="pt-8 pb-16 md:pt-12 md:pb-24 px-4 sm:px-6 lg:px-8 bg-gray-950">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Projects</h2>
@@ -126,12 +130,12 @@ export default function PortfolioSection() {
             whileTap="tap"
             onMouseEnter={() => setIsButtonHovered(true)}
             onMouseLeave={() => setIsButtonHovered(false)}
-            className="group relative inline-flex overflow-hidden rounded-xl bg-gray-900 border border-gray-800 py-4 px-8 font-bold text-white transition-all duration-300 hover:border-indigo-500"
+            className="group relative inline-flex overflow-hidden rounded-xl bg-gray-900 border border-gray-800 py-4 px-8 font-bold text-white transition-all duration-300 md:border-indigo-500 max-md:border-indigo-500"
           >
             {/* The Gradient Dot Background (Expands) */}
             <motion.span
               variants={{
-                initial: { scale: 0, x: "-50%", y: "-50%" },
+                initial: isMobile ? { scale: 1, x: "-50%", y: "-50%" } : { scale: 0, x: "-50%", y: "-50%" },
                 hover: { scale: 1, x: "-50%", y: "-50%" },
               }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -139,10 +143,10 @@ export default function PortfolioSection() {
             />
 
             {/* Button Content */}
-            <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-white">
+            <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-white max-md:text-white">
               View More on GitHub
               <motion.div
-                animate={isButtonHovered ? { opacity: 1, x: 5 } : { opacity: 0, x: -10 }}
+                animate={isMobile || isButtonHovered ? { opacity: 1, x: 5 } : { opacity: 0, x: -10 }}
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}
                 className="flex items-center"
               >
