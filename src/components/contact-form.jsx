@@ -65,7 +65,7 @@ export default function ContactForm() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-gray-950 border border-gray-800 rounded-2xl p-8 space-y-6"
+          className="bg-gray-950 border border-indigo-500 rounded-2xl p-8 space-y-6"
         >
           {/* Input Fields (Name, Email, Subject) */}
           {[
@@ -73,13 +73,13 @@ export default function ContactForm() {
               label: "Your Name",
               id: "name",
               type: "text",
-              placeholder: "John Doe",
+              placeholder: "Your Full Name",
             },
             {
               label: "Your Email",
               id: "email",
               type: "email",
-              placeholder: "john@example.com",
+              placeholder: "your.email@example.com",
             },
             {
               label: "Subject",

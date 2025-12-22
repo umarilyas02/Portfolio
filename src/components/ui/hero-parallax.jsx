@@ -191,12 +191,14 @@ export const ProductCard = ({
         href={product.link}
         className="block group-hover/product:shadow-2xl "
       >
-        <img
+        <Image
           src={product.thumbnail}
-          height="600"
-          width="600"
-          className="object-cover object-top-left absolute h-full w-full inset-0"
           alt={product.title}
+          fill
+          sizes="(min-width:768px) 20vw, 60vw"
+          quality={90}
+          className="object-cover object-top-left absolute inset-0"
+          priority={false}
         />
       </a>
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>

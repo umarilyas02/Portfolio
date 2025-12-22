@@ -3,6 +3,32 @@ import { useEffect, useState } from "react";
 import { Github, ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import Loader from "@/app/loader";
+import { products } from "@/components/hero-parallax-demo";
+import Image from "next/image";
+
+// Map repo names to product thumbnails
+const getProjectImage = (repoName) => {
+  const imageMap = {
+    "fitgrips": products.find(p => p.title === "FitGrips")?.thumbnail,
+    "nexus": products.find(p => p.title === "Nexus")?.thumbnail,
+    // Map GitHub repo name to BRAND product image
+    "ecommerce-frontend-design": products.find(p => p.title === "BRAND")?.thumbnail,
+    // Also support a simple alias if repo name is just 'brand'
+    "brand": products.find(p => p.title === "BRAND")?.thumbnail,
+  };
+  
+  return imageMap[repoName.toLowerCase()] || null;
+};
+
+// Map repo names to tech stack badges to display
+const getProjectStack = (repoName) => {
+  const key = repoName.toLowerCase();
+  if (key.includes("fitgrips")) return ["Next.js", "RTK"];
+  if (key === "ecommerce-frontend-design" || key.includes("brand"))
+    return ["React", "Context API"];
+  if (key.includes("nexus")) return ["React", "WebRTC", "Firebase"];
+  return [];
+};
 
 export default function PortfolioSection() {
   const [repos, setRepos] = useState([]);
@@ -77,47 +103,80 @@ export default function PortfolioSection() {
           {repos
             .filter((repo) => repo.name !== "umarilyas02")
             .slice(0, 6)
-            .map((repo) => (
-            <a
-              key={repo.id}
-              href={repo.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 group"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-xl font-bold group-hover:text-indigo-400 transition-colors duration-200 flex-1">
-                  {repo.name}
-                </h3>
-                <Github className="w-5 h-5 text-gray-500 group-hover:text-indigo-400 transition-colors duration-200" />
-              </div>
-              
-              <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-                {repo.description || "No description provided"}
-              </p>
+            .map((repo) => {
+              const projectImage = getProjectImage(repo.name);
+              const stack = getProjectStack(repo.name);
+              return (
+                <a
+                  key={repo.id}
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gray-900 border border-indigo-200 rounded-lg overflow-hidden hover:border-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 group flex flex-col h-full"
+                >
+                  {/* Image Section */}
+                  {projectImage && (
+                    <div className="relative w-full h-48 overflow-hidden bg-gray-800">
+                      <Image
+                        src={projectImage}
+                        alt={repo.name}
+                        fill
+                        sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+                        quality={90}
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        priority={false}
+                      />
+                    </div>
+                  )}
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {repo.language && (
-                  <span className="text-xs bg-indigo-900 text-indigo-200 px-3 py-1 rounded-full">
-                    {repo.language}
-                  </span>
-                )}
-                {repo.topics && repo.topics.slice(0, 2).map((topic) => (
-                  <span
-                    key={topic}
-                    className="text-xs bg-gray-800 text-gray-300 px-3 py-1 rounded-full"
-                  >
-                    {topic}
-                  </span>
-                ))}
-              </div>
+                  {/* Content Section */}
+                  <div className="p-6 flex flex-col flex-grow">
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="text-xl font-bold group-hover:text-indigo-400 transition-colors duration-200 flex-1">
+                        {repo.name}
+                      </h3>
+                      <Github className="w-5 h-5 text-gray-500 group-hover:text-indigo-400 transition-colors duration-200 shrink-0 ml-2" />
+                    </div>
+                    
+                    <p className="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
+                      {repo.description || "No description provided"}
+                    </p>
 
-              <div className="flex items-center justify-between text-xs text-gray-500">
-                <span>⭐ {repo.stargazers_count}</span>
-                <span>🍴 {repo.forks_count}</span>
-              </div>
-            </a>
-          ))}
+                    {/* Recognized tech stack badges */}
+                    {stack.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {stack.map((label) => (
+                          <span key={label} className="text-xs bg-indigo-900 text-indigo-200 px-3 py-1 rounded-full">
+                            {label}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {repo.language && (
+                        <span className="text-xs bg-indigo-900 text-indigo-200 px-3 py-1 rounded-full">
+                          {repo.language}
+                        </span>
+                      )}
+                      {repo.topics && repo.topics.slice(0, 2).map((topic) => (
+                        <span
+                          key={topic}
+                          className="text-xs bg-gray-800 text-gray-300 px-3 py-1 rounded-full"
+                        >
+                          {topic}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs text-gray-500 mt-auto">
+                      <span>⭐ {repo.stargazers_count}</span>
+                      <span>🍴 {repo.forks_count}</span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
         </div>
 
         <div className="text-center mt-12">
