@@ -52,7 +52,7 @@ export default function PortfolioSection() {
 
   if (error) {
     return (
-      <section id="projects" className="pt-8 pb-16 md:pt-12 md:pb-24 px-4 sm:px-6 lg:px-8 bg-gray-950">
+      <section id="projects" className="mt-4 pt-8 pb-16 md:pt-14 md:pb-24 px-4 sm:px-6 lg:px-8 bg-gray-950">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Projects</h2>
