@@ -25,7 +25,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-950 border-t border-gray-800 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center text-gray-400">
-          <p>&copy; 2025 UMAR ILYAS - Portfolio. All rights reserved.</p>
+          <p>&copy; 2026 UMAR ILYAS - Portfolio. All rights reserved.</p>
         </div>
       </footer>
     </main>

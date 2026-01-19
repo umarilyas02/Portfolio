@@ -189,20 +189,20 @@ export default function PortfolioSection() {
             whileTap="tap"
             onMouseEnter={() => setIsButtonHovered(true)}
             onMouseLeave={() => setIsButtonHovered(false)}
-            className="group relative inline-flex overflow-hidden rounded-xl bg-gray-900 border border-gray-800 py-4 px-8 font-bold text-white transition-all duration-300 md:border-indigo-500 max-md:border-indigo-500"
+            className="group relative inline-flex overflow-hidden rounded-xl bg-transparent border border-white/20 py-4 px-8 font-bold text-white transition-all duration-300 md:bg-transparent md:border-white/20 max-md:bg-linear-to-r max-md:from-indigo-600 max-md:to-indigo-500 max-md:border-indigo-500"
           >
-            {/* The Gradient Dot Background (Expands) */}
+            {/* The Gradient Dot Background (Expands on hover/mobile) */}
             <motion.span
               variants={{
                 initial: isMobile ? { scale: 1, x: "-50%", y: "-50%" } : { scale: 0, x: "-50%", y: "-50%" },
                 hover: { scale: 1, x: "-50%", y: "-50%" },
               }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              className="absolute left-1/2 top-1/2 z-0 h-[350%] w-[110%] origin-center rounded-full bg-linear-to-r from-indigo-600 to-indigo-500"
+              className="absolute left-1/2 top-1/2 z-0 h-[350%] w-[110%] origin-center rounded-full bg-linear-to-r from-indigo-600 to-indigo-500 md:block max-md:hidden"
             />
 
             {/* Button Content */}
-            <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-white max-md:text-white">
+            <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-white">
               View More on GitHub
               <motion.div
                 animate={isMobile || isButtonHovered ? { opacity: 1, x: 5 } : { opacity: 0, x: -10 }}

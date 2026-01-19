@@ -79,7 +79,7 @@ export default function ContactForm() {
               label: "Your Email",
               id: "email",
               type: "email",
-              placeholder: "your.email@example.com",
+              placeholder: "youremail@example.com",
             },
             {
               label: "Subject",
@@ -140,28 +140,29 @@ export default function ContactForm() {
           )}
 
           {/* Submit Button - Matching Form Style */}
-          <motion.button
-            type="submit"
-            disabled={loading}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-            onMouseEnter={() => setIsButtonHovered(true)}
-            onMouseLeave={() => setIsButtonHovered(false)}
-            className="group relative w-full overflow-hidden rounded-xl bg-gray-900 border border-gray-800 py-4 px-8 font-bold text-white transition-all duration-300 disabled:opacity-50 md:border-indigo-500 max-md:border-indigo-500"
-          >
-            {/* The Gradient Dot Background (Expands) */}
+          <div className="flex justify-center">
+            <motion.button
+              type="submit"
+              disabled={loading}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              onMouseEnter={() => setIsButtonHovered(true)}
+              onMouseLeave={() => setIsButtonHovered(false)}
+              className="group relative inline-flex overflow-hidden rounded-xl bg-transparent border border-white/20 py-4 px-8 font-bold text-white transition-all duration-300 disabled:opacity-50 md:bg-transparent md:border-white/20 max-md:bg-linear-to-r max-md:from-indigo-600 max-md:to-indigo-500 max-md:border-indigo-500"
+            >
+            {/* The Gradient Dot Background (Expands on hover/mobile) */}
             <motion.span
               variants={{
                 initial: isMobile ? { scale: 1, x: "-50%", y: "-50%" } : { scale: 0, x: "-50%", y: "-50%" },
                 hover: { scale: 1, x: "-50%", y: "-50%" },
               }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              className="absolute left-1/2 top-1/2 z-0 h-[350%] w-[110%] origin-center rounded-full bg-linear-to-r from-indigo-600 to-indigo-500"
+              className="absolute left-1/2 top-1/2 z-0 h-[350%] w-[110%] origin-center rounded-full bg-linear-to-r from-indigo-600 to-indigo-500 md:block max-md:hidden"
             />
 
             {/* Button Content */}
-            <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-white max-md:text-white">
+            <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-white">
               {loading ? (
                 "Sending..."
               ) : (
@@ -176,12 +177,13 @@ export default function ContactForm() {
                     transition={{ type: "spring", stiffness: 100, damping: 15 }}
                     className="flex items-center"
                   >
-                    <ArrowUpRight className="h-7 w-7" />
+                    <ArrowUpRight className="h-5 w-5" />
                   </motion.div>
                 </>
               )}
             </span>
           </motion.button>
+          </div>
         </form>
       </div>
     </section>

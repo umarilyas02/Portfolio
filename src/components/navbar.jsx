@@ -22,7 +22,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="shrink-0">
+          <div className="shrink-0 hover:scale-110 hover:transition-all">
             <Link href="#" className="text-2xl font-bold text-white">
               UMAR ILYAS
             </Link>

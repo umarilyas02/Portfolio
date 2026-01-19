@@ -158,10 +158,21 @@ export const HeroParallax = ({
 };
 
 export const Header = ({ scrolled, isMobile }) => {
+  const titles = [
+    "NextJS Developer",
+    "ReactJs Developer",
+    "Frontend Developer",
+    "Backend Developer",
+    "Web Developer",
+    "Wordpress Developer",
+  ];
   return (
     <div className={`max-w-7xl relative mx-auto pt-20 md:py-40 px-4 w-full left-0 top-0 ${isMobile ? (scrolled ? 'pb-8' : 'pb-2') : 'pb-0'}`}>
-      <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
-       Frontend Developer
+      <h1 className="text-2xl md:text-7xl font-bold dark:text-white flex items-center gap-2">
+        <span className="typing-text-minimal">
+          <TypingText phrases={titles} typingSpeed={75} deletingSpeed={40} pauseDuration={900} />
+        </span>
+        <span className="h-[1em] w-0.5 bg-indigo-300 caret-grow" aria-hidden="true"></span>
       </h1>
       <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
         Frontend Developer with sepecialization in React.js, Next.js, and modern
@@ -170,6 +181,44 @@ export const Header = ({ scrolled, isMobile }) => {
       </p>
     </div>
   );
+};
+
+const TypingText = ({
+  phrases,
+  typingSpeed = 80,
+  deletingSpeed = 40,
+  pauseDuration = 1000,
+}) => {
+  const [text, setText] = React.useState("");
+  const [isDeleting, setIsDeleting] = React.useState(false);
+  const [phraseIndex, setPhraseIndex] = React.useState(0);
+  const [charIndex, setCharIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!phrases || phrases.length === 0) return;
+
+    const currentPhrase = phrases[phraseIndex % phrases.length];
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      const pause = setTimeout(() => setIsDeleting(true), pauseDuration);
+      return () => clearTimeout(pause);
+    }
+
+    if (isDeleting && charIndex === 0) {
+      setIsDeleting(false);
+      setPhraseIndex((idx) => (idx + 1) % phrases.length);
+    }
+
+    const interval = setInterval(() => {
+      const nextIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+      setCharIndex(nextIndex);
+      setText(currentPhrase.slice(0, nextIndex));
+    }, isDeleting ? deletingSpeed : typingSpeed);
+
+    return () => clearInterval(interval);
+  }, [phrases, phraseIndex, charIndex, isDeleting, typingSpeed, deletingSpeed, pauseDuration]);
+
+  return <span aria-live="polite">{text}</span>;
 };
 
 export const ProductCard = ({
