@@ -4,7 +4,6 @@ export async function POST(req) {
   try {
     const { name, email, subject, message } = await req.json();
 
-    // Validate input
     if (!name || !email || !subject || !message) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
@@ -12,8 +11,6 @@ export async function POST(req) {
       );
     }
 
-    // Create transporter using Gmail SMTP
-    // Note: You'll need to set up environment variables for credentials
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -22,7 +19,6 @@ export async function POST(req) {
       },
     });
 
-    // Email content
     const mailOptions = {
       from: email,
       to: "umarilyas389@gmail.com",
@@ -37,7 +33,6 @@ export async function POST(req) {
       `,
     };
 
-    // Send email
     await transporter.sendMail(mailOptions);
 
     return new Response(

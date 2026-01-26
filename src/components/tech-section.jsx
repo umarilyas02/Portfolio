@@ -24,7 +24,6 @@ export default function TechSection() {
     { name: "WordPress", logo: "https://s.w.org/style/images/about/WordPress-logotype-wmark.png" },
   ];
 
-  // Duplicate the array for seamless infinite scroll
   const duplicatedTechnologies = [...technologies, ...technologies];
 
   return (
@@ -37,9 +36,7 @@ export default function TechSection() {
           </p>
         </div>
 
-        {/* Auto-scrolling carousel */}
         <div className="relative overflow-hidden">
-          {/* Gradient overlays for fade effect */}
           <div className="absolute left-0 top-0 bottom-0 w-10 bg-linear-to-r from-black via-black/80 to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-10 bg-linear-to-l from-black via-black/80 to-transparent z-10 pointer-events-none" />
           

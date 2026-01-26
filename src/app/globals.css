@@ -84,7 +84,6 @@ body {
   color: white;
 }
 
-/* Custom scrollbar themed to brand (desktop + all scrollables) */
 * {
   scrollbar-width: thin;
   scrollbar-color: #6366f1 #0a0a0a;
@@ -111,7 +110,6 @@ body {
   }
 }
 
-/* Hide horizontal scrollbars */
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -121,7 +119,6 @@ body {
   display: none;
 }
 
-/* Blinking caret that grows vertically then fades */
 @keyframes caretGrow {
   0% {
     transform: scaleY(0.5);

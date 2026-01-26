@@ -6,22 +6,18 @@ import Loader from "@/app/loader";
 import { products } from "@/components/hero-parallax-demo";
 import Image from "next/image";
 
-// Map repo names to product thumbnails
 const getProjectImage = (repoName) => {
   const imageMap = {
     "fitgrips": products.find(p => p.title === "FitGrips")?.thumbnail,
     "nexus": products.find(p => p.title === "Nexus")?.thumbnail,
-    // Map GitHub repo name to BRAND product image
     "ecommerce-frontend-design": products.find(p => p.title === "BRAND")?.thumbnail,
     "ecom-design": products.find(p => p.title === "BRAND")?.thumbnail,
-    // Also support a simple alias if repo name is just 'brand'
     "brand": products.find(p => p.title === "BRAND")?.thumbnail,
   };
   
   return imageMap[repoName.toLowerCase()] || null;
 };
 
-// Map repo names to tech stack badges to display
 const getProjectStack = (repoName) => {
   const key = repoName.toLowerCase();
   if (key.includes("fitgrips")) return ["Next.js", "RTK", "MySQL", "Zod"];
@@ -49,7 +45,7 @@ export default function PortfolioSection() {
     const fetchRepos = async () => {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
 
         const response = await fetch(
           "https://api.github.com/users/umarilyas02/repos?sort=updated&direction=desc",
@@ -57,9 +53,7 @@ export default function PortfolioSection() {
         );
         clearTimeout(timeoutId);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch repositories");
-        }
+        if (!response.ok) throw new Error("Failed to fetch repositories");
         const data = await response.json();
         setRepos(data);
       } catch (err) {
@@ -117,7 +111,6 @@ export default function PortfolioSection() {
                   rel="noopener noreferrer"
                   className="min-w-[72%] md:min-w-0 bg-gray-900 border border-indigo-200 rounded-lg hover:border-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 group flex flex-col h-full snap-start"
                 >
-                  {/* Image Section */}
                   {projectImage && (
                     <div className="relative w-full h-48 overflow-hidden bg-gray-800">
                       <Image
@@ -132,7 +125,6 @@ export default function PortfolioSection() {
                     </div>
                   )}
 
-                  {/* Content Section */}
                   <div className="p-6 flex flex-col grow">
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="text-xl font-bold group-hover:text-indigo-400 transition-colors duration-200 flex-1">
@@ -145,7 +137,6 @@ export default function PortfolioSection() {
                       {repo.description || "No description provided"}
                     </p>
 
-                    {/* Recognized tech stack badges */}
                     {stack.length > 0 && (
                       <div className="flex flex-wrap gap-2 mb-4">
                         {stack.map((label) => (

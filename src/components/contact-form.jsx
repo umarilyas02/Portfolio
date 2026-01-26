@@ -67,7 +67,6 @@ export default function ContactForm() {
           onSubmit={handleSubmit}
           className="bg-gray-950 border border-indigo-500 rounded-2xl p-8 space-y-6"
         >
-          {/* Input Fields (Name, Email, Subject) */}
           {[
             {
               label: "Your Name",
