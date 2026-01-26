@@ -33,6 +33,28 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# explicit local env files
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# editors/IDE
+.vscode/
+.idea/
+
+# caches/build tools
+.turbo
+.cache
+.eslintcache
+
+# macOS
+.DS_Store
+
+# local helper scripts
+scripts/generate_seo_assets.py
+scripts
+
 # vercel
 .vercel
 

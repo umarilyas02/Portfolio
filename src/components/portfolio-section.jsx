@@ -97,6 +97,7 @@ export default function PortfolioSection() {
         <div className="flex overflow-x-auto space-x-4 md:space-x-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:[grid-auto-rows:minmax(0,1fr)] snap-x snap-mandatory hide-scrollbar items-stretch">
           {repos
             .filter((repo) => repo.name !== "umarilyas02")
+            .filter((repo) => repo.name.toLowerCase() !== "portfolio")
             .filter((repo) => !repo.name.toLowerCase().includes("mini"))
             .slice(0, 6)
             .map((repo) => {
