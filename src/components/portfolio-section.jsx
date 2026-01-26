@@ -13,6 +13,7 @@ const getProjectImage = (repoName) => {
     "nexus": products.find(p => p.title === "Nexus")?.thumbnail,
     // Map GitHub repo name to BRAND product image
     "ecommerce-frontend-design": products.find(p => p.title === "BRAND")?.thumbnail,
+    "ecom-design": products.find(p => p.title === "BRAND")?.thumbnail,
     // Also support a simple alias if repo name is just 'brand'
     "brand": products.find(p => p.title === "BRAND")?.thumbnail,
   };
@@ -23,8 +24,8 @@ const getProjectImage = (repoName) => {
 // Map repo names to tech stack badges to display
 const getProjectStack = (repoName) => {
   const key = repoName.toLowerCase();
-  if (key.includes("fitgrips")) return ["Next.js", "RTK"];
-  if (key === "ecommerce-frontend-design" || key.includes("brand"))
+  if (key.includes("fitgrips")) return ["Next.js", "RTK", "MySQL", "Zod"];
+  if (key === "ecommerce-frontend-design" || key === "ecom-design" || key.includes("brand"))
     return ["React", "Context API"];
   if (key.includes("nexus")) return ["React", "WebRTC", "Firebase"];
   return [];
@@ -99,20 +100,22 @@ export default function PortfolioSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex overflow-x-auto space-x-4 md:space-x-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:[grid-auto-rows:minmax(0,1fr)] snap-x snap-mandatory hide-scrollbar items-stretch">
           {repos
             .filter((repo) => repo.name !== "umarilyas02")
+            .filter((repo) => !repo.name.toLowerCase().includes("mini"))
             .slice(0, 6)
             .map((repo) => {
               const projectImage = getProjectImage(repo.name);
               const stack = getProjectStack(repo.name);
+              const displayName = repo.name === "ecommerce-frontend-design" ? "Ecom Design" : repo.name;
               return (
                 <a
                   key={repo.id}
                   href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-900 border border-indigo-200 rounded-lg overflow-hidden hover:border-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 group flex flex-col h-full"
+                  className="min-w-[72%] md:min-w-0 bg-gray-900 border border-indigo-200 rounded-lg hover:border-indigo-500 transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 group flex flex-col h-full snap-start"
                 >
                   {/* Image Section */}
                   {projectImage && (
@@ -130,15 +133,15 @@ export default function PortfolioSection() {
                   )}
 
                   {/* Content Section */}
-                  <div className="p-6 flex flex-col flex-grow">
+                  <div className="p-6 flex flex-col grow">
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="text-xl font-bold group-hover:text-indigo-400 transition-colors duration-200 flex-1">
-                        {repo.name}
+                        {displayName}
                       </h3>
                       <Github className="w-5 h-5 text-gray-500 group-hover:text-indigo-400 transition-colors duration-200 shrink-0 ml-2" />
                     </div>
                     
-                    <p className="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
+                    <p className="text-gray-400 text-sm mb-4 line-clamp-2 grow">
                       {repo.description || "No description provided"}
                     </p>
 
@@ -179,7 +182,7 @@ export default function PortfolioSection() {
             })}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 flex justify-center">
           <motion.a
             href="https://github.com/umarilyas02"
             target="_blank"
@@ -191,7 +194,6 @@ export default function PortfolioSection() {
             onMouseLeave={() => setIsButtonHovered(false)}
             className="group relative inline-flex overflow-hidden rounded-xl bg-transparent border border-white/20 py-4 px-8 font-bold text-white transition-all duration-300 md:bg-transparent md:border-white/20 max-md:bg-linear-to-r max-md:from-indigo-600 max-md:to-indigo-500 max-md:border-indigo-500"
           >
-            {/* The Gradient Dot Background (Expands on hover/mobile) */}
             <motion.span
               variants={{
                 initial: isMobile ? { scale: 1, x: "-50%", y: "-50%" } : { scale: 0, x: "-50%", y: "-50%" },
@@ -201,7 +203,6 @@ export default function PortfolioSection() {
               className="absolute left-1/2 top-1/2 z-0 h-[350%] w-[110%] origin-center rounded-full bg-linear-to-r from-indigo-600 to-indigo-500 md:block max-md:hidden"
             />
 
-            {/* Button Content */}
             <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-white">
               View More on GitHub
               <motion.div

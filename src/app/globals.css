@@ -84,6 +84,43 @@ body {
   color: white;
 }
 
+/* Custom scrollbar themed to brand (desktop + all scrollables) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 #0a0a0a;
+}
+
+@media (min-width: 768px) {
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6366f1, #a855f7, #6366f1);
+    border-radius: 9999px;
+    border: 2px solid #0a0a0a;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c80f8, #b46afc, #7c80f8);
+  }
+}
+
+/* Hide horizontal scrollbars */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Blinking caret that grows vertically then fades */
 @keyframes caretGrow {
   0% {

@@ -22,11 +22,15 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="shrink-0 hover:scale-110 hover:transition-all">
+          <motion.div
+            whileHover={{ scale: 1.08 }}
+            transition={{ type: "spring", stiffness: 260, damping: 18 }}
+            className="shrink-0"
+          >
             <Link href="#" className="text-2xl font-bold text-white">
               UMAR ILYAS
             </Link>
-          </div>
+          </motion.div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
