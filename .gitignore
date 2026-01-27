@@ -48,6 +48,13 @@ yarn-error.log*
 .cache
 .eslintcache
 
+# documentation/optimization files
+BEFORE_AFTER.md
+DEPLOY_CHECKLIST.md
+OPTIMIZATION_SUMMARY.md
+PERFORMANCE_GUIDE.md
+deploy-optimized.sh
+
 # macOS
 .DS_Store
 
