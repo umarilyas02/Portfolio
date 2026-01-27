@@ -305,8 +305,12 @@ export const ProductCard = ({ product, translate }) => {
           src={product.thumbnail}
           alt={product.title}
           fill
-          sizes="(min-width:768px) 20vw, 60vw"
+          sizes="(max-width: 768px) 60vw, 20vw"
           className="object-cover object-top-left absolute inset-0"
+          loading="lazy"
+          quality={75}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
         />
       </a>
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none transition-opacity" />

@@ -5,15 +5,33 @@ import { SchemaScript } from "@/components/schema";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+// Optimize font loading with preload and display swap
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+  fallback: ['Courier New', 'monospace'],
 });
+
+// Enable static generation with revalidation
+export const revalidate = 3600; // Revalidate every hour
+
+// Optimize viewport for performance
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#000000',
+};
 
 export const metadata = {
   metadataBase: new URL("https://umarilyas.dev"),
@@ -66,6 +84,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Resource hints for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://aceternity.com" />
+        <link rel="preconnect" href="https://vercel.live" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >

@@ -1,9 +1,29 @@
-"use client";
-import { HeroParallax } from "@/components/ui/hero-parallax";
-import PortfolioSection from "@/components/portfolio-section";
-import TechSection from "@/components/tech-section";
-import ContactForm from "@/components/contact-form";
+import dynamic from 'next/dynamic';
 import { products } from "@/components/hero-parallax-demo";
+
+// Dynamic imports with loading states to reduce initial bundle size
+const HeroParallax = dynamic(
+  () => import('@/components/ui/hero-parallax').then(mod => ({ default: mod.HeroParallax })),
+  { 
+    loading: () => (
+      <div className="h-screen flex items-center justify-center bg-black">
+        <div className="animate-pulse text-white text-2xl">Loading...</div>
+      </div>
+    )
+  }
+);
+
+const PortfolioSection = dynamic(() => import('@/components/portfolio-section'), {
+  loading: () => <div className="h-96 bg-black" />
+});
+
+const TechSection = dynamic(() => import('@/components/tech-section'), {
+  loading: () => <div className="h-96 bg-black" />
+});
+
+const ContactForm = dynamic(() => import('@/components/contact-form'), {
+  loading: () => <div className="h-96 bg-black" />
+});
 
 export default function Home() {
   return (
