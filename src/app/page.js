@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { products } from "@/components/hero-parallax-demo";
+import SocialLinksHorizontal from '@/components/social-links-horizontal';
 
 // Dynamic imports with loading states to reduce initial bundle size
 const HeroParallax = dynamic(
@@ -21,6 +22,10 @@ const TechSection = dynamic(() => import('@/components/tech-section'), {
   loading: () => <div className="h-96 bg-black" />
 });
 
+const CertificationsSection = dynamic(() => import('@/components/certifications-section'), {
+  loading: () => <div className="h-96 bg-black" />
+});
+
 const ContactForm = dynamic(() => import('@/components/contact-form'), {
   loading: () => <div className="h-96 bg-black" />
 });
@@ -39,13 +44,25 @@ export default function Home() {
       {/* Tech I Love Section */}
       <TechSection />
 
+      {/* Certifications Section */}
+      <CertificationsSection />
+
       {/* Contact Section */}
       <ContactForm />
 
       {/* Footer */}
-      <footer className="bg-gray-950 border-t border-gray-800 py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center text-gray-400">
-          <p>&copy; 2026 UMAR ILYAS - Portfolio. All rights reserved.</p>
+      <footer className="bg-gray-950 border-t border-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Social Links */}
+          <div className="mb-8 pb-8 border-b border-gray-800">
+            <h3 className="text-center text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">Connect With Me</h3>
+            <SocialLinksHorizontal />
+          </div>
+          
+          {/* Footer Text */}
+          <div className="text-center text-gray-400">
+            <p>&copy; 2026 UMAR ILYAS - Portfolio. All rights reserved.</p>
+          </div>
         </div>
       </footer>
     </main>

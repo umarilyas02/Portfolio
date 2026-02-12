@@ -1,5 +1,77 @@
 @import "tailwindcss";
 
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.6),
+                0 0 30px rgba(99, 102, 241, 0.4),
+                0 0 50px rgba(99, 102, 241, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 1),
+                0 0 40px rgba(99, 102, 241, 0.6),
+                0 0 60px rgba(99, 102, 241, 0.4);
+  }
+}
+
+@keyframes icon-glow {
+  0%, 100% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 6px currentColor);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px currentColor) drop-shadow(0 0 35px currentColor) drop-shadow(0 0 50px currentColor);
+  }
+}
+
+.social-icon-mobile {
+  animation: icon-glow 2.5s ease-in-out infinite;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tech section scrollbar - hidden on desktop but scrollable */
+.tech-section-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tech-section-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom Scrollbar for certifications */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 rgba(31, 41, 55, 0.5);
+}
+
 :root {
   /* Brand Colors */
   --color-primary: #6366f1;    /* The indigo you want for 3D glow */

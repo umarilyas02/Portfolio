@@ -40,17 +40,17 @@ export default function TechSection() {
           <div className="absolute left-0 top-0 bottom-0 w-10 bg-linear-to-r from-black via-black/80 to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-10 bg-linear-to-l from-black via-black/80 to-transparent z-10 pointer-events-none" />
           
-          <div className="flex">
+          <div className="overflow-x-auto hide-scrollbar">
             <motion.div
-              className="flex gap-10 md:gap-16 py-4"
+              className="flex gap-10 md:gap-16 py-4 will-change-transform"
               animate={{
-                x: ["0%", "-50%"],
+                x: -1500,
               }}
               transition={{
                 x: {
                   repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 25,
+                  repeatType: "reverse",
+                  duration: 20,
                   ease: "linear",
                 },
               }}

@@ -54,7 +54,7 @@ DEPLOY_CHECKLIST.md
 OPTIMIZATION_SUMMARY.md
 PERFORMANCE_GUIDE.md
 deploy-optimized.sh
-
+.gitignnore
 # macOS
 .DS_Store
 
@@ -68,3 +68,7 @@ scripts
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.gitignnore
+deploy-optimized.sh
+OPTIMIZATION_SUMMARY.md
+PERFORMANCE_GUIDE.md

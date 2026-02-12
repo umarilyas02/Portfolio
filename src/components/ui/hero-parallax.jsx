@@ -151,7 +151,7 @@ export const HeroParallax = ({ products }) => {
 
       <div
         ref={ref}
-        className={`${isMobile ? "min-h-[80vh]" : "h-[300vh]"} py-20 md:py-40 overflow-hidden antialiased relative flex flex-col self-auto perspective-[1000px] transform-3d`}
+        className={`${isMobile ? "min-h-[80vh]" : "h-[250vh]"} py-20 md:py-40 overflow-hidden antialiased relative flex flex-col self-auto perspective-[1000px] transform-3d`}
       >
         <Header scrolled={scrolled} isMobile={isMobile} />
         <motion.div
