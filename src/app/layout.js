@@ -14,9 +14,9 @@ const mori = localFont({
 });
 
 export const metadata = {
-  title: "Umar Ilyas • Creative Web Developer",
+  title: "Umar Ilyas • Full-Stack Developer",
   description:
-    "Full-stack web developer crafting custom, thoughtful digital products — designed and brought to life with code.",
+    "Full-stack developer building custom, production-grade web and mobile products — engineered end to end with code.",
 };
 
 export default function RootLayout({ children }) {

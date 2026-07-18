@@ -21,11 +21,11 @@ export default function AboutContent() {
       <div className="mx-auto max-w-[1200px]">
         <h1 className="leading-[0.98] tracking-[-0.03em] text-[clamp(3rem,10vw,9rem)]">
           <MaskLine load duration={1.1}>
-            <span className="block">Developer with</span>
+            <span className="block">Developer who</span>
           </MaskLine>
           <MaskLine load duration={1.1} delay={0.12}>
             <span className="block pl-[12vw]">
-              a designer&apos;s eye<span className="text-mint">.</span>
+              ships end to end<span className="text-mint">.</span>
             </span>
           </MaskLine>
         </h1>
@@ -61,7 +61,7 @@ export default function AboutContent() {
           <ul className="flex flex-wrap gap-3">
             {STACK.map((tech, i) => (
               <FadeIn key={tech} delay={i * 0.05} y={16}>
-                <li className="rounded-full border border-ink/20 px-5 py-2.5 text-sm transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-cream">
+                <li className="rounded-full border border-ink/20 px-5 py-2.5 text-sm transition-colors duration-300 hover:border-pine hover:bg-pine hover:text-cream">
                   {tech}
                 </li>
               </FadeIn>

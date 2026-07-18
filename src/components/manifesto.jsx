@@ -10,11 +10,11 @@ export default function Manifesto() {
       {/* stacked statements */}
       <div className="mx-auto max-w-[1200px] space-y-6 leading-[1.02] tracking-[-0.02em] text-[clamp(2.2rem,6vw,5.5rem)]">
         <MaskLine duration={1.1}>
-          <span className="block">Designer/Developer</span>
+          <span className="block">Full-Stack Developer</span>
         </MaskLine>
         <MaskLine duration={1.1} delay={0.08}>
           <span className="block pl-[10vw]">
-            Hybrid
+            Web &amp; Mobile
           </span>
         </MaskLine>
         <MaskLine duration={1.1} delay={0.12}>
@@ -39,7 +39,7 @@ export default function Manifesto() {
         >
           <Link
             href="/works"
-            className="group inline-flex items-center gap-3 rounded-full bg-lime px-8 py-4 text-[13px] font-semibold tracking-[0.14em] text-ink transition-transform duration-500 ease-out hover:scale-110"
+            className="group inline-flex items-center gap-3 rounded-full bg-lime px-8 py-4 text-[13px] font-semibold tracking-[0.14em] text-ink transition-[background-color,color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:bg-pine hover:text-cream"
           >
             VIEW WORKS
             <span
@@ -55,7 +55,7 @@ export default function Manifesto() {
       {/* scroll-fill paragraph */}
       <div className="mx-auto mt-28 max-w-[1100px] md:mt-44">
         <ScrollFillWords
-          text="Just custom-made, thoughtful products — designed and brought to life with code."
+          text="Just custom-made, production-grade products — engineered and brought to life with code."
           accent={["code."]}
           className="leading-[1.12] tracking-[-0.02em] text-[clamp(2rem,5vw,4.6rem)]"
         />

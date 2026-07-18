@@ -21,7 +21,7 @@ export default function WorksIndex() {
         <FadeIn load delay={0.3}>
           <p className="mt-6 max-w-md text-sm leading-relaxed text-muted">
             A selection of e-commerce storefronts, dashboards, ERPs, and SaaS
-            products — designed and engineered end-to-end.
+            products — built and shipped end-to-end.
           </p>
         </FadeIn>
 

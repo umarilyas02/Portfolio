@@ -1,25 +1,20 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { MaskLine, FadeIn, EASE } from "./reveal";
 
 export default function Hero() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  const yPortrait = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
+  // the hero is pinned: the rest of the page slides over it, so its
+  // exit choreography is driven by raw page scroll over the first viewport
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 900], [0, 180]);
+  const yPortrait = useTransform(scrollY, [0, 900], [0, 100]);
+  const opacity = useTransform(scrollY, [0, 810], [1, 0]);
+  const scale = useTransform(scrollY, [0, 900], [1, 0.96]);
 
   return (
-    <section
-      ref={ref}
-      className="relative flex min-h-svh flex-col justify-between px-5 pt-24 pb-8 md:px-10"
-    >
+    <section className="sticky top-0 flex min-h-svh flex-col justify-between px-5 pt-24 pb-8 md:px-10">
       {/* top meta row */}
       <div className="flex justify-between text-[11px] font-semibold tracking-[0.14em] text-muted">
         <FadeIn load delay={1.1} duration={0.7}>
@@ -52,11 +47,11 @@ export default function Hero() {
 
       {/* giant offset headline */}
       <motion.h1
-        style={{ y, opacity }}
+        style={{ y, opacity, scale }}
         className="relative z-0 mx-auto w-full max-w-[1200px] font-normal leading-[0.98] tracking-[-0.03em] text-[clamp(3.2rem,11vw,10.5rem)]"
       >
         <MaskLine load delay={0.25} duration={1.1}>
-          <span className="block">Creative Web</span>
+          <span className="block">Full-Stack</span>
         </MaskLine>
         <MaskLine load delay={0.4} duration={1.1}>
           <span className="block pl-[18vw]">Developer</span>
@@ -66,10 +61,25 @@ export default function Hero() {
       {/* bottom row */}
       <div className="relative z-20 flex items-end justify-between">
         <FadeIn load delay={1.3} duration={0.7}>
-          <p className="max-w-[240px] text-[13px] leading-snug text-muted">
-            Specialized in custom full-stack development &amp; thoughtful
-            design
-          </p>
+          <div>
+            <p className="max-w-[240px] text-[13px] leading-snug text-muted">
+              Specialized in custom full-stack development — web &amp; mobile,
+              end to end
+            </p>
+            <a
+              href="/Umar-Ilyas-CV.pdf"
+              download
+              className="group mt-4 inline-flex items-center gap-2 border-b border-ink/30 pb-1 text-[11px] font-semibold tracking-[0.14em] text-ink transition-colors duration-300 hover:border-mint hover:text-mint"
+            >
+              DOWNLOAD CV
+              <span
+                aria-hidden
+                className="transition-transform duration-500 group-hover:translate-y-0.5"
+              >
+                ↓
+              </span>
+            </a>
+          </div>
         </FadeIn>
 
         <FadeIn load delay={1.45} duration={0.7}>

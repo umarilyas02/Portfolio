@@ -84,12 +84,15 @@ export default function Footer() {
               GITHUB
             </a>
             <a
-              href="https://www.linkedin.com/"
+              href="https://www.linkedin.com/in/umarilyas02"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-colors hover:text-lime"
             >
               LINKEDIN
+            </a>
+            <a href="/Umar-Ilyas-CV.pdf" download className="transition-colors hover:text-lime">
+              DOWNLOAD CV
             </a>
           </div>
           <button
