@@ -37,6 +37,30 @@ body {
   color: var(--ink);
 }
 
+/* Branded keyboard focus — mint on light surfaces, lime on dark ones */
+:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.bg-ink :focus-visible {
+  outline-color: var(--lime);
+}
+
+/* LIVE badge dot — soft radar pulse */
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(191, 219, 57, 0.6);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 5px rgba(191, 219, 57, 0);
+  }
+}
+.live-dot {
+  animation: live-pulse 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
 /* Lenis smooth scroll */
 html.lenis,
 html.lenis body {
@@ -52,6 +76,15 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* Touch carousels scroll without a visible scrollbar */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Thin scrollbar like the reference site */
 ::-webkit-scrollbar {
   width: 6px;
@@ -62,4 +95,110 @@ html.lenis body {
 ::-webkit-scrollbar-thumb {
   background: rgba(23, 35, 29, 0.35);
   border-radius: 999px;
+}
+
+/* Continuous technology rails. Three tiled groups keep the track wider than
+   any viewport, so the loop never runs out of content mid-scroll. */
+.tech-marquee {
+  --marquee-gap: 0.75rem;
+  overflow: hidden;
+  contain: paint;
+  /* Room for the hover lift so pills don't clip against the row edge. */
+  padding-block: 0.5rem;
+  margin-block: -0.5rem;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 7%,
+    black 93%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 7%,
+    black 93%,
+    transparent
+  );
+}
+
+.tech-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: var(--marquee-gap);
+  animation: tech-marquee var(--marquee-duration, 42s) linear infinite;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.tech-marquee-group {
+  display: flex;
+  min-width: max-content;
+  flex-shrink: 0;
+  gap: var(--marquee-gap);
+}
+
+.tech-marquee[data-direction="reverse"] .tech-marquee-track {
+  animation-direction: reverse;
+}
+
+.tech-marquee:hover .tech-marquee-track {
+  animation-play-state: paused;
+}
+
+/* Shift by exactly one group's width (+ its trailing gap) = 1/3 of the
+   3-group track, expressed as a fraction of track width plus its share
+   of the two inter-group gaps baked into that 100%. */
+@keyframes tech-marquee {
+  to {
+    transform: translate3d(
+      calc(-100% / 3 - var(--marquee-gap) / 3),
+      0,
+      0
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee {
+    overflow: visible;
+    contain: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .tech-marquee-track {
+    width: 100%;
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+
+  .tech-marquee-group {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tech-marquee-group > li {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .tech-marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+
+  /* Collapse every CSS animation/transition to instant state changes */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -14,14 +14,67 @@ import { liveProjects } from "@/data/projects";
 
 function StatusBadge({ liveUrl }) {
   return liveUrl ? (
-    <span className="absolute right-4 top-4 z-10 inline-flex items-center gap-2 rounded-full bg-ink/60 px-3 py-1.5 text-[10px] font-semibold tracking-[0.14em] text-cream backdrop-blur-sm">
-      <span className="h-1.5 w-1.5 rounded-full bg-lime" />
+    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-ink px-2.5 py-1 text-[9px] font-semibold tracking-[0.12em] text-cream">
+      <span className="live-dot h-1.5 w-1.5 rounded-full bg-lime" />
       LIVE
     </span>
   ) : (
-    <span className="absolute right-4 top-4 z-10 rounded-full bg-ink/60 px-3 py-1.5 text-[10px] font-semibold tracking-[0.14em] text-cream backdrop-blur-sm">
+    <span className="shrink-0 rounded-full bg-ink px-2.5 py-1 text-[9px] font-semibold tracking-[0.12em] text-cream">
       PRIVATE BUILD
     </span>
+  );
+}
+
+function DesktopMockup({ project, imageStyle }) {
+  const contain = project.coverFit === "contain";
+  const displayUrl = project.liveUrl
+    ? project.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
+    : `${project.slug}.workspace`;
+
+  return (
+    <div className="relative aspect-[16/10] w-full max-w-full overflow-hidden rounded-2xl bg-pine px-[4%] pb-[5%] pt-[4%] shadow-[0_28px_70px_-40px_rgba(18,60,47,0.9)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5">
+      <div className="flex h-full flex-col overflow-hidden rounded-[0.7rem] border border-white/20 bg-white shadow-[0_18px_45px_-24px_rgba(0,0,0,0.75)]">
+        <div className="flex h-10 shrink-0 items-center gap-2 border-b border-ink/10 bg-[#f4f4f2] px-3 sm:h-11 sm:px-4">
+          <div className="flex shrink-0 gap-1.5" aria-hidden>
+            <span className="h-2 w-2 rounded-full bg-[#ff6b5f]" />
+            <span className="h-2 w-2 rounded-full bg-[#f2bd45]" />
+            <span className="h-2 w-2 rounded-full bg-[#55c46a]" />
+          </div>
+          <div className="mx-auto hidden min-w-0 max-w-[58%] flex-1 items-center justify-center rounded-md border border-ink/10 bg-white/80 px-3 py-1 sm:flex">
+            <span className="truncate text-[9px] text-muted/80">
+              {displayUrl}
+            </span>
+          </div>
+          <StatusBadge liveUrl={project.liveUrl} />
+        </div>
+        <div
+          className={`relative min-h-0 flex-1 overflow-hidden ${contain ? "bg-white" : "bg-[#eef0ee]"}`}
+        >
+          <motion.div
+            style={contain ? undefined : imageStyle}
+            className={contain ? "absolute inset-0" : "absolute inset-[-8%_0]"}
+          >
+            <Image
+              src={project.cover}
+              alt={`${project.title} desktop interface`}
+              fill
+              sizes="(max-width: 768px) 92vw, 44vw"
+              style={{
+                objectFit: contain ? "contain" : "cover",
+                objectPosition:
+                  project.coverPosition ?? (contain ? "center" : "center top"),
+              }}
+              className="transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+            />
+          </motion.div>
+          <div className="pointer-events-none absolute inset-0 bg-pine/0 transition-colors duration-500 group-hover:bg-pine/10" />
+        </div>
+      </div>
+      <div
+        aria-hidden
+        className="absolute bottom-[1.8%] left-1/2 h-[1.5%] w-[34%] -translate-x-1/2 rounded-full bg-white/15"
+      />
+    </div>
   );
 }
 
@@ -31,8 +84,8 @@ function CardMeta({ project, number }) {
 
   return (
     <>
-      <div className="mt-5 flex items-baseline justify-between gap-4">
-        <h3 className="text-xl font-normal tracking-[-0.01em] transition-colors duration-500 group-hover:text-mint md:text-2xl">
+      <div className="mt-5 flex min-w-0 flex-col items-start gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+        <h3 className="min-w-0 text-xl font-normal tracking-[-0.01em] transition-colors duration-500 group-hover:text-mint md:text-2xl">
           <span className="mr-2.5 align-[0.35em] text-[0.55em] font-semibold text-fog">
             {number}
           </span>
@@ -44,7 +97,7 @@ function CardMeta({ project, number }) {
             ↗
           </span>
         </h3>
-        <p className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.14em] text-fog">
+        <p className="max-w-full text-[10px] font-semibold uppercase tracking-[0.12em] text-fog sm:text-right sm:text-[11px] sm:tracking-[0.14em]">
           {project.category}
         </p>
       </div>
@@ -81,42 +134,29 @@ export function WorkCard({ project, index }) {
 
   const card = (
     <FadeIn y={60} duration={1} delay={(index % 2) * 0.1}>
-      <div className="group">
-        <div
-          ref={ref}
-          className="relative overflow-hidden rounded-2xl bg-pine/10 aspect-[4/3]"
-        >
-          <motion.div style={{ y }} className="absolute inset-[-10%_0]">
-            <Image
-              src={project.cover}
-              alt={project.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-          </motion.div>
-          <div className="pointer-events-none absolute inset-0 z-[5] bg-pine/0 transition-colors duration-500 group-hover:bg-pine/25" />
-          <StatusBadge liveUrl={project.liveUrl} />
+      <div
+        className="group min-w-0 w-full"
+        style={{ maxWidth: "calc(100vw - 2.5rem)" }}
+      >
+        <div ref={ref}>
+          <DesktopMockup project={project} imageStyle={{ y }} />
         </div>
         <CardMeta project={project} number={number} />
       </div>
     </FadeIn>
   );
 
-  return project.liveUrl ? (
-    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-      {card}
-    </a>
-  ) : (
-    <div>{card}</div>
-  );
+  return <Link href={`/works/${project.slug}`}>{card}</Link>;
 }
 
 export function WorksGrid({ projects }) {
   return (
     <div className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 md:gap-y-24">
       {projects.map((project, i) => (
-        <div key={project.slug} className={i % 2 === 1 ? "md:mt-24" : ""}>
+        <div
+          key={project.slug}
+          className={`min-w-0 ${i % 2 === 1 ? "md:mt-24" : ""}`}
+        >
           <WorkCard project={project} index={i} />
         </div>
       ))}
@@ -129,28 +169,12 @@ function HorizontalCard({ project, index }) {
 
   const card = (
     <div className="group w-[82vw] shrink-0 md:w-[44vw] lg:w-[36vw]">
-      <div className="relative overflow-hidden rounded-2xl bg-pine/10 aspect-[4/3]">
-        <Image
-          src={project.cover}
-          alt={project.title}
-          fill
-          sizes="(max-width: 768px) 82vw, 44vw"
-          className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-        />
-        <div className="pointer-events-none absolute inset-0 z-[5] bg-pine/0 transition-colors duration-500 group-hover:bg-pine/25" />
-        <StatusBadge liveUrl={project.liveUrl} />
-      </div>
+      <DesktopMockup project={project} />
       <CardMeta project={project} number={number} />
     </div>
   );
 
-  return project.liveUrl ? (
-    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-      {card}
-    </a>
-  ) : (
-    <div>{card}</div>
-  );
+  return <Link href={`/works/${project.slug}`}>{card}</Link>;
 }
 
 export default function RecentWorks() {
@@ -195,7 +219,7 @@ export default function RecentWorks() {
       <FadeIn delay={0.2}>
         <Link
           href="/works"
-          className="group hidden items-center gap-2 text-[12px] font-semibold tracking-[0.14em] text-muted transition-colors duration-300 hover:text-mint md:inline-flex"
+          className="group inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.14em] text-muted transition-colors duration-300 hover:text-mint"
         >
           ALL WORKS
           <span
@@ -250,7 +274,7 @@ export default function RecentWorks() {
           {/* end tile → all works */}
           <Link
             href="/works"
-            className="group flex aspect-[4/3] w-[60vw] shrink-0 items-center justify-center rounded-2xl border border-ink/15 transition-colors duration-500 hover:border-pine hover:bg-pine hover:text-cream md:w-[24vw]"
+            className="group flex aspect-[16/10] w-[60vw] shrink-0 items-center justify-center rounded-2xl border border-ink/15 transition-[background-color,border-color,color,transform] duration-500 hover:border-pine hover:bg-pine hover:text-cream active:scale-[0.98] md:w-[24vw]"
           >
             <span className="flex items-center gap-3 text-[13px] font-semibold tracking-[0.14em]">
               ALL WORKS

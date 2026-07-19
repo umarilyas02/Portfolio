@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import { MaskLine, FadeIn, EASE } from "./reveal";
+import { MaskLine, FadeIn } from "./reveal";
 
 export default function Hero() {
   // the hero is pinned: the rest of the page slides over it, so its
@@ -16,7 +16,7 @@ export default function Hero() {
   return (
     <section className="sticky top-0 flex min-h-svh flex-col justify-between px-5 pt-24 pb-8 md:px-10">
       {/* top meta row */}
-      <div className="flex justify-between text-[11px] font-semibold tracking-[0.14em] text-muted">
+      <div className="flex justify-between gap-4 text-[11px] font-semibold tracking-[0.14em] text-muted">
         <FadeIn load delay={1.1} duration={0.7}>
           <p>FULL-STACK / NEXT.JS</p>
         </FadeIn>
@@ -45,17 +45,27 @@ export default function Hero() {
         </motion.div>
       </div>
 
+      {/* mobile: the centered portrait sits behind the bottom row, and its dark
+          jacket makes ink text unreadable — fade its base into the cream bg */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-15 h-44 bg-linear-to-t from-cream via-cream/70 to-transparent md:hidden"
+      />
+
       {/* giant offset headline */}
       <motion.h1
         style={{ y, opacity, scale }}
-        className="relative z-0 mx-auto w-full max-w-[1200px] font-normal leading-[0.98] tracking-[-0.03em] text-[clamp(3.2rem,11vw,10.5rem)]"
+        className="relative z-0 mx-auto w-full max-w-[1200px] font-normal leading-[0.98] tracking-[-0.03em] text-[clamp(2.9rem,14vw,10.5rem)] md:text-[clamp(3.2rem,11vw,10.5rem)]"
       >
-        <MaskLine load delay={0.25} duration={1.1}>
-          <span className="block">Full-Stack</span>
-        </MaskLine>
-        <MaskLine load delay={0.4} duration={1.1}>
-          <span className="block pl-[18vw]">Developer</span>
-        </MaskLine>
+        <span className="sr-only">Umar Ilyas — Full-Stack Developer</span>
+        <span aria-hidden>
+          <MaskLine load delay={0.25} duration={1.1}>
+            <span className="block">Full-Stack</span>
+          </MaskLine>
+          <MaskLine load delay={0.4} duration={1.1}>
+            <span className="block pl-[12vw] md:pl-[18vw]">Developer</span>
+          </MaskLine>
+        </span>
       </motion.h1>
 
       {/* bottom row */}
@@ -69,7 +79,7 @@ export default function Hero() {
             <a
               href="/Umar-Ilyas-CV.pdf"
               download
-              className="group mt-4 inline-flex items-center gap-2 border-b border-ink/30 pb-1 text-[11px] font-semibold tracking-[0.14em] text-ink transition-colors duration-300 hover:border-mint hover:text-mint"
+              className="group mt-4 hidden items-center gap-2 border-b border-ink/30 pb-1 text-[11px] font-semibold tracking-[0.14em] text-ink transition-colors duration-300 hover:border-mint hover:text-mint md:inline-flex"
             >
               DOWNLOAD CV
               <span

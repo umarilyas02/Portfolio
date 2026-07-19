@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { MaskLine, ScrollFillWords, EASE } from "./reveal";
+import Magnetic from "./magnetic";
 
 export default function Manifesto() {
   return (
@@ -37,18 +38,20 @@ export default function Manifesto() {
           viewport={{ once: true, margin: "-15% 0px" }}
           transition={{ duration: 0.8, ease: EASE }}
         >
-          <Link
-            href="/works"
-            className="group inline-flex items-center gap-3 rounded-full bg-lime px-8 py-4 text-[13px] font-semibold tracking-[0.14em] text-ink transition-[background-color,color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:bg-pine hover:text-cream"
-          >
-            VIEW WORKS
-            <span
-              aria-hidden
-              className="transition-transform duration-500 group-hover:rotate-45"
+          <Magnetic strength={0.35}>
+            <Link
+              href="/works"
+              className="group inline-flex items-center gap-3 rounded-full bg-lime px-8 py-4 text-[13px] font-semibold tracking-[0.14em] text-ink transition-[background-color,color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:bg-pine hover:text-cream active:scale-95"
             >
-              ↗
-            </span>
-          </Link>
+              VIEW WORKS
+              <span
+                aria-hidden
+                className="transition-transform duration-500 group-hover:rotate-45"
+              >
+                ↗
+              </span>
+            </Link>
+          </Magnetic>
         </motion.div>
       </div>
 

@@ -19,13 +19,15 @@ export default function AboutContent() {
   return (
     <section className="px-5 pt-36 pb-28 md:px-10 md:pt-48 md:pb-40">
       <div className="mx-auto max-w-[1200px]">
-        <h1 className="leading-[0.98] tracking-[-0.03em] text-[clamp(3rem,10vw,9rem)]">
+        <h1 className="leading-[0.98] tracking-[-0.03em] text-[clamp(2.2rem,11.5vw,9rem)] md:text-[clamp(3rem,10vw,9rem)]">
           <MaskLine load duration={1.1}>
             <span className="block">Developer who</span>
           </MaskLine>
           <MaskLine load duration={1.1} delay={0.12}>
             <span className="block pl-[12vw]">
-              ships end to end<span className="text-mint">.</span>
+              ships end
+              <br className="md:hidden" /> to end
+              <span className="text-mint">.</span>
             </span>
           </MaskLine>
         </h1>
