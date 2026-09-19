@@ -9,6 +9,14 @@ export const liveProjects = [
     repoUrl: "https://github.com/umarilyas02/OpenForge",
     category: "CMS / Site Builder",
     techStack: ["Next.js", "React", "JavaScript (JSDoc)", "PostgreSQL", "Redis", "MinIO", "Docker Compose", "AST-based compiler"],
+    features: [
+      "Live-canvas block editor — 15+ block types (Hero, Columns, Call to Action, Gradient Heading, Icon Box...) dragged onto a real rendered page",
+      "Every edit is a genuine AST transform against the page's actual .jsx source file, never a regex rewrite",
+      "21 installable WordPress-style themes, each with its own token overrides and a working example site",
+      "Chrome-free, shareable site preview separate from the authenticated editor",
+      "One-click push of a site's real Next.js project to a connected GitHub repo",
+      "Self-hosted end to end via Docker Compose — Postgres, Redis, and MinIO alongside the app",
+    ],
     cover: "/projects/openforge/dashboard.webp",
     gallery: [
       { src: "/projects/openforge/dashboard.webp", caption: "Sites Dashboard" },
@@ -26,6 +34,29 @@ export const liveProjects = [
     liveUrl: null,
     category: "Logistics / Event-Driven Systems",
     techStack: ["Next.js 16", "TypeScript", "Tailwind CSS", "shadcn/ui", "Apache Kafka", "RabbitMQ", "Socket.io", "PostgreSQL", "n8n", "Docker"],
+    features: [
+      "Kafka event stream (KRaft mode, no ZooKeeper) as the durable, replayable log of every shipment event",
+      "RabbitMQ task queue with per-attempt backoff, broker-confirmed retries, and a dead-letter queue for failed notification jobs",
+      "Live dispatcher ↔ driver chat per shipment over Socket.io, persisted to Postgres and readable by whoever connects next",
+      "Proactive delay detection — a periodic sweep flags a shipment stuck in one status past threshold, not just on its next event",
+      "n8n workflows for delay alerts and a scheduled daily digest, decoupled from the core services",
+      "Admin view with real-time service health, RabbitMQ queue depth, and per-partition Kafka consumer lag",
+      "Five independently deployable services (ingestion API, stream processor, worker, websocket gateway, dashboard), each its own Dockerfile",
+    ],
+    chat: {
+      title: "A real dispatcher ↔ driver conversation",
+      messages: [
+        { from: "You (Dispatcher)", side: "right", text: "Morning Marcus, you are on DF-DE9DC878, Long Beach Gate 4 to the Riverside DC. Pickup window is 9:00-10:30 today, can you confirm you will make that?" },
+        { from: "Marcus Ibe (Driver)", side: "left", text: "Yep, ETA to the gate is 8:50. Should be inside the window no problem." },
+        { from: "You (Dispatcher)", side: "right", text: "Great. Gate code changed this morning, it is 4471 not what is on the BOL. Security will have your name at the desk." },
+        { from: "Marcus Ibe (Driver)", side: "left", text: "Got it, 4471. Loaded and rolling, container is a bit heavier than manifested but within limits." },
+        { from: "Marcus Ibe (Driver)", side: "left", text: "Heads up, 91 East is backed up past the 15 interchange. Accident's cleared but traffic is still crawling, might run 30-40 min behind on the drop." },
+        { from: "You (Dispatcher)", side: "right", text: "Copy that, thanks for the heads up. I will let Riverside DC know you are running late. Customer note: forklift access is south dock only, ask for Reyna at receiving." },
+        { from: "Marcus Ibe (Driver)", side: "left", text: "South dock, ask for Reyna, got it." },
+        { from: "Marcus Ibe (Driver)", side: "left", text: "At Riverside DC now, backed into the south dock. Reyna is signing off on the load." },
+        { from: "Marcus Ibe (Driver)", side: "left", text: "Delivered. POD signed and photo uploaded, dock receipt number is RVD-88213." },
+      ],
+    },
     cover: "/projects/dispatchflow/dashboard.webp",
     gallery: [
       { src: "/projects/dispatchflow/dashboard.webp", caption: "Dispatcher Board" },
@@ -39,10 +70,24 @@ export const liveProjects = [
     title: "PM Chatbot",
     tagline: "AI-powered project management workspace.",
     description:
-      "Full-stack SaaS for Kanban planning, multi-user workspaces, real-time collaboration, notifications, and a Gemini-based PM assistant.",
+      "Full-stack SaaS for Kanban planning, multi-user workspaces, real-time collaboration, notifications, and a Gemini-based PM assistant. Shipped under its own product name, CreateX.",
     liveUrl: "https://pm-chatbot-rho.vercel.app/",
     category: "Productivity SaaS",
     techStack: ["Next.js", "PostgreSQL", "Supabase", "@dnd-kit", "JWT (jose)", "Zod", "Sonner", "Nodemailer", "Google Gemini", "Claude Code"],
+    features: [
+      "Drag-and-drop Kanban boards (@dnd-kit) with real-time multi-user collaboration and notifications",
+      "AI assistant grounded in the workspace's real data — reads and mutates actual tasks by natural language, not a generic chatbot bolted on the side",
+      "Per-project chat memory with a visible budget (the app surfaces its own \"Memory: 1/40\" usage)",
+      "Multi-user workspaces with JWT-based auth (jose) and role separation",
+      "Transactional email via Nodemailer for invites and notifications",
+    ],
+    chat: {
+      title: "A real exchange with the AI assistant",
+      messages: [
+        { from: "You", side: "right", text: "Show me all overdue tasks" },
+        { from: "CreateX Assistant", side: "left", text: "Here are the tasks that are currently overdue:\n\n• create backend ([Test Project] | Status: In Progress | Priority: High)" },
+      ],
+    },
     cover: "/projects/project-management/dashboard.webp",
     gallery: [
       { src: "/projects/project-management/dashboard.webp", caption: "Dashboard" },
