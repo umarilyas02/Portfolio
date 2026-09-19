@@ -122,6 +122,7 @@ export const liveProjects = [
       { src: "/projects/project-management/login.webp", caption: "Login" },
       { src: "/projects/project-management/chatbot.webp", caption: "Chatbot" },
       { src: "/projects/project-management/management-tab.webp", caption: "Management Tab" },
+      { src: "/projects/project-management/team-chat.webp", caption: "Team Chat" },
       { src: "/projects/project-management/settings.webp", caption: "Settings" },
     ],
   },
