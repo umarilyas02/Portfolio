@@ -114,6 +114,11 @@ function CardMeta({ project, number }) {
         </p>
       </div>
       <p className="mt-1 text-sm text-muted">{project.tagline}</p>
+      {project.techHighlight && (
+        <p className="mt-2 whitespace-pre-line text-[11px] font-medium leading-relaxed text-mint">
+          {project.techHighlight}
+        </p>
+      )}
       <ul className="mt-4 flex flex-wrap gap-2">
         {stack.map((tech) => (
           <li
