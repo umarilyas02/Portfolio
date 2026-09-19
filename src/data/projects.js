@@ -115,7 +115,7 @@ export const liveProjects = [
   },
   {
     slug: "snpridesports-dashboard",
-    title: "SN Pride Dashboard",
+    title: "SEO Focused CMS",
     tagline: "Content, SEO, and media health at a glance.",
     description:
       "Admin and SEO dashboard for products, categories, blogs, media, exports, and site health. It includes content management, SEO gap analysis, and reporting tools.",
