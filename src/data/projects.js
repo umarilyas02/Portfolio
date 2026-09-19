@@ -1,5 +1,40 @@
 export const liveProjects = [
   {
+    slug: "openforge",
+    title: "OpenForge",
+    tagline: "A WordPress+Elementor-style CMS where the site is a real Next.js project.",
+    description:
+      "A self-hosted, single-user CMS: drag-and-drop editing on a live canvas backed by real JSX page files, not a JSON blob in a database. The block editor parses a page's real source into an editable tree and writes edits back as genuine AST transforms — never regex — via a purpose-built compiler. Ships with a chrome-free site preview, media library, a growing library of installable themes, and pushing a site's real project straight to a GitHub repo.",
+    liveUrl: null,
+    repoUrl: "https://github.com/umarilyas02/OpenForge",
+    category: "CMS / Site Builder",
+    techStack: ["Next.js", "React", "JavaScript (JSDoc)", "PostgreSQL", "Redis", "MinIO", "Docker Compose", "AST-based compiler"],
+    cover: "/projects/openforge/dashboard.webp",
+    gallery: [
+      { src: "/projects/openforge/dashboard.webp", caption: "Sites Dashboard" },
+      { src: "/projects/openforge/editor.webp", caption: "Live Canvas Block Editor" },
+      { src: "/projects/openforge/preview.webp", caption: "Chrome-Free Site Preview" },
+      { src: "/projects/openforge/theme-picker.webp", caption: "Theme Library (21 Themes)" },
+    ],
+  },
+  {
+    slug: "dispatchflow",
+    title: "DispatchFlow",
+    tagline: "Event-driven dispatch, tracked and chatted through, live.",
+    description:
+      "A logistics dispatch and shipment-tracking platform built to demonstrate event-driven system design end to end: Apache Kafka as the durable, replayable event backbone, RabbitMQ for point-to-point task queues with retry and dead-letter handling, Socket.io for real-time dashboard push and live dispatcher-driver chat, and n8n for workflow automation (delay alerts, daily digests) — five independently deployable services in one monorepo, each with its own Dockerfile.",
+    liveUrl: null,
+    category: "Logistics / Event-Driven Systems",
+    techStack: ["Next.js 16", "TypeScript", "Tailwind CSS", "shadcn/ui", "Apache Kafka", "RabbitMQ", "Socket.io", "PostgreSQL", "n8n", "Docker"],
+    cover: "/projects/dispatchflow/dashboard.webp",
+    gallery: [
+      { src: "/projects/dispatchflow/dashboard.webp", caption: "Dispatcher Board" },
+      { src: "/projects/dispatchflow/chat.webp", caption: "Live Dispatcher-Driver Chat" },
+      { src: "/projects/dispatchflow/driver-board.webp", caption: "Driver Board" },
+      { src: "/projects/dispatchflow/admin.webp", caption: "System Health & Queue Monitoring" },
+    ],
+  },
+  {
     slug: "x4shipping",
     title: "X4 Shipping",
     tagline: "Global freight, coordinated in motion.",
@@ -203,40 +238,6 @@ export const liveProjects = [
       { src: "/projects/smart-admission-guide/profile.webp", caption: "Profile" },
       { src: "/projects/smart-admission-guide/application-pack.webp", caption: "Application Pack" },
       { src: "/projects/smart-admission-guide/admin.webp", caption: "Admin" },
-    ],
-  },
-  {
-    slug: "dispatchflow",
-    title: "DispatchFlow",
-    tagline: "Event-driven dispatch, tracked and chatted through, live.",
-    description:
-      "A logistics dispatch and shipment-tracking platform built to demonstrate event-driven system design end to end: Apache Kafka as the durable, replayable event backbone, RabbitMQ for point-to-point task queues with retry and dead-letter handling, Socket.io for real-time dashboard push and live dispatcher-driver chat, and n8n for workflow automation (delay alerts, daily digests) — five independently deployable services in one monorepo, each with its own Dockerfile.",
-    liveUrl: null,
-    category: "Logistics / Event-Driven Systems",
-    techStack: ["Next.js 16", "TypeScript", "Tailwind CSS", "shadcn/ui", "Apache Kafka", "RabbitMQ", "Socket.io", "PostgreSQL", "n8n", "Docker"],
-    cover: "/projects/dispatchflow/dashboard.webp",
-    gallery: [
-      { src: "/projects/dispatchflow/dashboard.webp", caption: "Dispatcher Board" },
-      { src: "/projects/dispatchflow/chat.webp", caption: "Live Dispatcher-Driver Chat" },
-      { src: "/projects/dispatchflow/driver-board.webp", caption: "Driver Board" },
-      { src: "/projects/dispatchflow/admin.webp", caption: "System Health & Queue Monitoring" },
-    ],
-  },
-  {
-    slug: "openforge",
-    title: "OpenForge",
-    tagline: "A WordPress+Elementor-style CMS where the site is a real Next.js project.",
-    description:
-      "A self-hosted, single-user CMS: drag-and-drop editing on a live canvas backed by real JSX page files, not a JSON blob in a database. The block editor parses a page's real source into an editable tree and writes edits back as genuine AST transforms — never regex — via a purpose-built compiler. Ships with a chrome-free site preview, media library, a growing library of installable themes, and pushing a site's real project straight to a GitHub repo.",
-    liveUrl: null,
-    category: "CMS / Site Builder",
-    techStack: ["Next.js", "React", "JavaScript (JSDoc)", "PostgreSQL", "Redis", "MinIO", "Docker Compose", "AST-based compiler"],
-    cover: "/projects/openforge/dashboard.webp",
-    gallery: [
-      { src: "/projects/openforge/dashboard.webp", caption: "Sites Dashboard" },
-      { src: "/projects/openforge/editor.webp", caption: "Live Canvas Block Editor" },
-      { src: "/projects/openforge/preview.webp", caption: "Chrome-Free Site Preview" },
-      { src: "/projects/openforge/theme-picker.webp", caption: "Theme Library (21 Themes)" },
     ],
   },
 ];

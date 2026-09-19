@@ -67,6 +67,21 @@ export default function ProjectDetail({ project, prev, next }) {
                 ↗
               </span>
             </a>
+          ) : project.repoUrl ? (
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-10 inline-flex items-center gap-2 border-b border-ink/30 pb-1 text-[12px] font-semibold tracking-[0.14em] text-ink transition-colors duration-300 hover:border-mint hover:text-mint"
+            >
+              VIEW ON GITHUB
+              <span
+                aria-hidden
+                className="transition-transform duration-500 group-hover:rotate-45"
+              >
+                ↗
+              </span>
+            </a>
           ) : (
             <p className="mt-10 inline-block rounded-full bg-ink px-4 py-2 text-[10px] font-semibold tracking-[0.14em] text-cream">
               PRIVATE BUILD

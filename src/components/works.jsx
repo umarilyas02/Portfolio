@@ -12,13 +12,23 @@ import {
 import { MaskLine, FadeIn } from "./reveal";
 import { liveProjects } from "@/data/projects";
 
-function StatusBadge({ liveUrl }) {
-  return liveUrl ? (
-    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-ink px-2.5 py-1 text-[9px] font-semibold tracking-[0.12em] text-cream">
-      <span className="live-dot h-1.5 w-1.5 rounded-full bg-lime" />
-      LIVE
-    </span>
-  ) : (
+function StatusBadge({ liveUrl, repoUrl }) {
+  if (liveUrl) {
+    return (
+      <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-ink px-2.5 py-1 text-[9px] font-semibold tracking-[0.12em] text-cream">
+        <span className="live-dot h-1.5 w-1.5 rounded-full bg-lime" />
+        LIVE
+      </span>
+    );
+  }
+  if (repoUrl) {
+    return (
+      <span className="shrink-0 rounded-full bg-ink px-2.5 py-1 text-[9px] font-semibold tracking-[0.12em] text-cream">
+        OPEN SOURCE
+      </span>
+    );
+  }
+  return (
     <span className="shrink-0 rounded-full bg-ink px-2.5 py-1 text-[9px] font-semibold tracking-[0.12em] text-cream">
       PRIVATE BUILD
     </span>
@@ -29,7 +39,9 @@ function DesktopMockup({ project, imageStyle }) {
   const contain = project.coverFit === "contain";
   const displayUrl = project.liveUrl
     ? project.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
-    : `${project.slug}.workspace`;
+    : project.repoUrl
+      ? project.repoUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
+      : `${project.slug}.workspace`;
 
   return (
     <div className="relative aspect-[16/10] w-full max-w-full overflow-hidden rounded-2xl bg-pine px-[4%] pb-[5%] pt-[4%] shadow-[0_28px_70px_-40px_rgba(18,60,47,0.9)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5">
@@ -45,7 +57,7 @@ function DesktopMockup({ project, imageStyle }) {
               {displayUrl}
             </span>
           </div>
-          <StatusBadge liveUrl={project.liveUrl} />
+          <StatusBadge liveUrl={project.liveUrl} repoUrl={project.repoUrl} />
         </div>
         <div
           className={`relative min-h-0 flex-1 overflow-hidden ${contain ? "bg-white" : "bg-[#eef0ee]"}`}
