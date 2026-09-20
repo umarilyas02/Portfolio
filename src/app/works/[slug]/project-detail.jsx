@@ -113,41 +113,6 @@ export default function ProjectDetail({ project, prev, next }) {
           </FadeIn>
         ) : null}
 
-        {project.chats?.length ? (
-          <FadeIn y={48} duration={1}>
-            <div className="mt-16 space-y-10 md:mt-20">
-              {project.chats.map((thread, t) => (
-                <div key={t}>
-                  <h2 className="text-[11px] font-semibold tracking-[0.2em] text-fog">
-                    {(thread.title ?? "SAMPLE CONVERSATION").toUpperCase()}
-                  </h2>
-                  <div className="mt-5 space-y-3 rounded-2xl border border-ink/10 bg-[#f6f6f4] p-5 md:p-7">
-                    {thread.messages.map((message, i) => (
-                      <div
-                        key={i}
-                        className={`flex ${message.side === "right" ? "justify-end" : "justify-start"}`}
-                      >
-                        <div
-                          className={`max-w-[85%] whitespace-pre-line rounded-2xl px-4 py-2.5 text-sm leading-relaxed sm:max-w-[75%] ${
-                            message.side === "right"
-                              ? "bg-ink text-cream"
-                              : "border border-ink/10 bg-white text-ink"
-                          }`}
-                        >
-                          <p className="mb-1 text-[9px] font-semibold uppercase tracking-[0.1em] opacity-60">
-                            {message.from}
-                          </p>
-                          {message.text}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-        ) : null}
-
         <div className="mt-16 space-y-12 md:mt-24 md:space-y-20">
           {project.gallery.map((shot) => (
             <FadeIn key={shot.src} y={48} duration={1}>
