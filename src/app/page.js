@@ -4,8 +4,11 @@ import RecentWorks from "@/components/works";
 import TechStack from "@/components/tech-stack";
 import Experience from "@/components/experience";
 import Footer from "@/components/footer";
+import { getGitHubActivity } from "@/lib/github";
 
-export default function Home() {
+export default async function Home() {
+  const githubActivity = await getGitHubActivity();
+
   return (
     <main>
       <Hero />
@@ -15,7 +18,7 @@ export default function Home() {
           <Manifesto />
           <RecentWorks />
           <TechStack />
-          <Experience />
+          <Experience githubActivity={githubActivity} />
         </div>
         <Footer />
       </div>

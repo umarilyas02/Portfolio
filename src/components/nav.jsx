@@ -148,11 +148,11 @@ function MobileMenu({ open, onClose, pathname, reduceMotion }) {
                   LINKEDIN
                 </a>
                 <a
-                  href="/Umar-Ilyas-CV.pdf"
+href="/Umar-Ilyas-Resume.pdf"
                   download
                   className="transition-colors duration-300 hover:text-lime"
                 >
-                  CV ↓
+                  RESUME ↓
                 </a>
               </motion.div>
             </div>
@@ -264,11 +264,11 @@ export default function Nav() {
             </a>
             <Magnetic strength={0.25}>
               <a
-                href="/Umar-Ilyas-CV.pdf"
+                href="/Umar-Ilyas-Resume.pdf"
                 download
                 className="group inline-flex items-center gap-2 rounded-full bg-lime px-4 py-1.5 text-[11px] font-semibold tracking-[0.14em] text-ink transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-pine hover:text-cream active:scale-95"
               >
-                CV
+                RESUME
                 <span
                   aria-hidden
                   className="transition-transform duration-500 group-hover:translate-y-0.5"

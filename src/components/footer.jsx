@@ -119,8 +119,8 @@ export default function Footer() {
             <SweepLink href="https://www.linkedin.com/in/umarilyas02" external>
               LINKEDIN
             </SweepLink>
-            <SweepLink href="/Umar-Ilyas-CV.pdf" download>
-              DOWNLOAD CV
+            <SweepLink href="/Umar-Ilyas-Resume.pdf" download>
+              DOWNLOAD RESUME
             </SweepLink>
           </div>
           <button

@@ -77,11 +77,11 @@ export default function Hero() {
               end to end
             </p>
             <a
-              href="/Umar-Ilyas-CV.pdf"
+              href="/Umar-Ilyas-Resume.pdf"
               download
               className="group mt-4 hidden items-center gap-2 border-b border-ink/30 pb-1 text-[11px] font-semibold tracking-[0.14em] text-ink transition-colors duration-300 hover:border-mint hover:text-mint md:inline-flex"
             >
-              DOWNLOAD CV
+              DOWNLOAD RESUME
               <span
                 aria-hidden
                 className="transition-transform duration-500 group-hover:translate-y-0.5"
